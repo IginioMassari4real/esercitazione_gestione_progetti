@@ -61,8 +61,14 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/home')
+@login_required  # Garantisce che solo gli utenti autenticati possano accedere
 def home(): 
     user_id = session.get('user_id')
+    if user_id:
+        user = User.query.get(user_id)
+        if user:
+            return render_template('home.html', user=user)  # Passa i dati dell'utente alla pagina
+    return redirect(url_for('login'))
 
-    if __name__ == '__main__': #debug
-        app.run(debug=True)
+if __name__ == '__main__': #debug
+      app.run(debug=True)
