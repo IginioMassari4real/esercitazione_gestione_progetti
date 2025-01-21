@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="static/registrazione.css">
+    </head>
+    <body>
+        <div class="login-card">
+            <h2 align="center">Registrazione</h2>
+            {% if error %}
+            <p style="color: red;">{{ error }}</p>
+            {% endif %}
+            <form method="POST">
+            <label>Username:</label><br>
+            <input type="text" name="username" required><br>
+            <label>Password:</label><br>
+            <input type="password" name="password" required>
+            <button type="submit">Registrati</button>
+            </form>
+            <br>
+            <a href="{{ url_for('login') }}">Hai già un account? Accedi qui.</a>
+        </div>
+    </body>
+</html>
