@@ -3,6 +3,7 @@ from flask_login import LoginManager, login_user, logout_user, login_required, c
 from models import db, User
 import sqlite3
 from flask_bcrypt import Bcrypt
+from utilis import api_request
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -67,10 +68,11 @@ def logout():
 @login_required  # Garantisce che solo gli utenti autenticati possano accedere
 def home(): 
     user_id = session.get('user_id')
+    people = api_request()
     if user_id:
         user = User.query.get(user_id)
         if user:
-            return render_template('home.html', user=user)  # Passa i dati dell'utente alla pagina
+            return render_template('home.html', user=user, people = people)  # Passa i dati dell'utente alla pagina
     return redirect(url_for('login'))
 
 if __name__ == '__main__': #debug
