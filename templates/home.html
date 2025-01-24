@@ -8,8 +8,25 @@
 </head>
 <body>
     <div class="Jumbotron">
-        <h1 align="center" style="margin-top: auto;">Benvenuto, {{ user.username }}!</h1>  
+        <h1 align="center" style="margin-top: auto;">Benvenuto, {{ user.username if user else 'ospite' }}!</h1>  
     </div>
+
+    <div class="space-info">
+        <h2 align="center">Persone nello Spazio</h2>
+        <div id="space-content">
+            {% if people %}
+                <p>Ci sono {{ people|length }} persone nello spazio:</p>
+                <ul>
+                    {% for person in people %}
+                        <li>{{ person.name }} ({{ person.craft }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Non ci sono persone nello spazio al momento.</p>
+            {% endif %}
+        </div>
+    </div>
+
     <a href="{{ url_for('logout') }}">Logout</a>
 </body>
 </html>
